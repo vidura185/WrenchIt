@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class GeneratedPoint : MonoBehaviour
 {
-    //Starting point should be placed and dragged into this
-    //next use
     public GameObject nextPoint;
     public GameObject parentPoint;
 
-    //prefab should already have this attached
-    public ControlPoint controlPoint;
+
+    private void OnDrawGizmosSelected()
+    {
+        if (parentPoint != null)
+        {
+            Vector3 offset = gameObject.transform.position - parentPoint.transform.position;
+            offset = offset.normalized;
+
+            transform.position = parentPoint.transform.position + offset;
+        }
+    }
 }
 
